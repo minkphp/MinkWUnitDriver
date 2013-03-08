@@ -18,6 +18,21 @@ $mink = new Mink(array(
 $mink->getSession('wunit')->getPage()->findLink('Chat')->click();
 ```
 
+Behat configuration
+-------------------
+
+``` yml
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      default_session: wunit
+
+    Behat\YiiExtension\Extension:
+      mink_driver: false
+      framework_script: ../../framework/yii.php
+      config_script: ../config/test.php
+```
+
 Installation
 ------------
 
@@ -25,6 +40,8 @@ Installation
 {
     "requires": {
         "behat/mink":              "1.4.*",
+		"behat/mink-extension":    "*",
+		"behat/yii-extension":     "*",
         "behat/mink-wunit-driver": "*"
     }
 }
