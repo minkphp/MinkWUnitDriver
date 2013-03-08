@@ -28,7 +28,6 @@ default:
       default_session: wunit
 
     Behat\YiiExtension\Extension:
-      mink_driver: false
       framework_script: ../../framework/yii.php
       config_script: ../config/test.php
 ```
