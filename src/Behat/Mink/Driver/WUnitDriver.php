@@ -49,7 +49,7 @@ class WUnitDriver extends BrowserKitDriver
      */
     public function setRequestHeader($name, $value)
     {
-        //$this->getClient()->setHeader($name, $value);
+        $this->getClient()->setHeader($name, $value);
     }
 
     /**
