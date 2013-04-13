@@ -31,28 +31,6 @@ class WUnitDriver extends BrowserKitDriver
     }
 
     /**
-     * Sets HTTP Basic authentication parameters
-     *
-     * @param string|Boolean $user     user name or false to disable authentication
-     * @param string         $password password
-     */
-    public function setBasicAuth($user, $password)
-    {
-        $this->getClient()->setAuth($user, $password);
-    }
-
-    /**
-     * Sets specific request header on client.
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function setRequestHeader($name, $value)
-    {
-        $this->getClient()->setHeader($name, $value);
-    }
-
-    /**
      * Returns last response headers.
      *
      * @return array
