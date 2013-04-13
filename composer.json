@@ -16,21 +16,21 @@
 
     "require": {
         "php":                           ">=5.3.1",
-        "behat/mink":                    ">=1.4.0,<1.5.0-dev",
-        "behat/mink-browserkit-driver":  "*",
-        "symfony/browser-kit":           "2.1.*@dev",
-        "symfony/css-selector":          "2.1.*@dev",
-        "symfony/dom-crawler":           "2.1.*@dev",
-        "symfony/http-foundation":       "2.1.*@dev",
-		"symfony/http-kernel":           "2.1.*@dev",
-        "symfony/process":               "2.1.*@dev"
+        "behat/mink":                    "~1.4.3",
+        "behat/mink-browserkit-driver":  "1.0.*",
+        "symfony/browser-kit":           "~2.1",
+        "symfony/css-selector":          "~2.1",
+        "symfony/dom-crawler":           "~2.1",
+        "symfony/http-foundation":       "~2.1",
+        "symfony/http-kernel":           "~2.1",
+        "symfony/process":               "~2.1"
     },
 
     "autoload": {
         "psr-0": {
             "Behat\\Mink\\Driver": "src/",
-			"WUnit\\Http": "src/",
-			"WUnit\\HttpKernel": "src/"
+            "WUnit\\Http": "src/",
+            "WUnit\\HttpKernel": "src/"
         }
     }
 }
