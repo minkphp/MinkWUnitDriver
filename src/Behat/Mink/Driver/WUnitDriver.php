@@ -31,24 +31,6 @@ class WUnitDriver extends BrowserKitDriver
     }
 
     /**
-     * Returns last response headers.
-     *
-     * @return array
-     */
-    public function getResponseHeaders()
-    {
-        return $this->getClient()->getResponse()->getHeaders();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getStatusCode()
-    {
-        return $this->getClient()->getResponse()->getStatus();
-    }
-
-    /**
      * Prepares URL for visiting.
      *
      * @param string $url
