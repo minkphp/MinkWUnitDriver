@@ -22,15 +22,15 @@
         "symfony/css-selector":          "~2.1",
         "symfony/dom-crawler":           "~2.1",
         "symfony/http-foundation":       "~2.1",
-		"symfony/http-kernel":           "~2.1",
+        "symfony/http-kernel":           "~2.1",
         "symfony/process":               "~2.1"
     },
 
     "autoload": {
         "psr-0": {
             "Behat\\Mink\\Driver": "src/",
-			"WUnit\\Http": "src/",
-			"WUnit\\HttpKernel": "src/"
+            "WUnit\\Http": "src/",
+            "WUnit\\HttpKernel": "src/"
         }
     }
 }
