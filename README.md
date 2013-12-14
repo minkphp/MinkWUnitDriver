@@ -1,6 +1,9 @@
 Mink WUnit Driver
 =================
 
+[![Latest Stable Version](https://poser.pugx.org/behat/mink-wunit-driver/v/stable.png)](https://packagist.org/packages/behat/mink-wunit-driver)
+[![Total Downloads](https://poser.pugx.org/behat/mink-wunit-driver/downloads.png)](https://packagist.org/packages/behat/mink-wunit-driver)
+
 Usage Example
 -------------
 
