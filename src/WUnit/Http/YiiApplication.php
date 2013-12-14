@@ -7,11 +7,12 @@
 
 namespace WUnit\Http;
 
-class YiiApplication extends \CWebApplication {
+class YiiApplication extends \CWebApplication
+{
 
-
-	public function end($status=0, $exit=true) {
-		parent::end(0, false);
-		throw new YiiExitException();
-	}
+    public function end($status = 0, $exit = true)
+    {
+        parent::end(0, false);
+        throw new YiiExitException();
+    }
 }
