@@ -50,12 +50,11 @@ class Client extends BaseClient
      */
     protected function getScript($request)
     {
-		$app =  str_replace("'", "\\'", serialize(\Yii::app()));
-		$request = str_replace("'", "\\'", serialize($request));
-		$includePaths = get_include_path();
+        $app = str_replace("'", "\\'", serialize(\Yii::app()));
+        $request = str_replace("'", "\\'", serialize($request));
+        $includePaths = get_include_path();
 
-
-		return <<<EOF
+        $out = <<<EOF
 <?php
 
 define('_PHP_INSULATE_', true);
@@ -68,5 +67,7 @@ require_once 'bootstrap.php';
 \$response = \$kernel->handle(\$request);
 echo serialize(\$response);
 EOF;
+
+        return $out;
     }
 }
