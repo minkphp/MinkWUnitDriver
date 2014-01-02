@@ -42,6 +42,19 @@ class Client extends BaseClient
     }
 
     /**
+     * Restarts the client.
+     *
+     * Unfortunately, the base class does not fully reset (server parameters are not reset).
+     *
+     * @see Symfony\Component\HttpKernel\Client
+     */
+    public function restart()
+    {
+        parent::restart();
+        $this->setServerParameters(array());
+    }
+
+    /**
      * Returns the script to execute when the request must be insulated.
      *
      * @param Request $request A Request instance
