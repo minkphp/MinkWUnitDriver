@@ -7,25 +7,31 @@
 
 namespace WUnit;
 
-class WUnitTestCase extends \CDbTestCase {
 
-	public function setUp() {
-		$this->useErrorHandler = true;
+class WUnitTestCase extends \CDbTestCase
+{
+
+    public function setUp()
+    {
+        $this->useErrorHandler = true;
 //		$this->setExpectedException('Exception');
-		parent::setUp();
+        parent::setUp();
 
-		set_exception_handler(array($this, 'excHandler'));
-	}
+        set_exception_handler(array($this, 'excHandler'));
+    }
 
-	public function excHandler($exception) {
-		 echo "Uncaught exception: " , $exception->getMessage(), "\n";
-	}
+    public function excHandler($exception)
+    {
+        echo "Uncaught exception: ", $exception->getMessage(), "\n";
+    }
 
-	/**
-	 * Create HttpKernel Client
-	 * @return WUnit\HttpKernel\Client
-	 */
-	public static function createClient() {
-		return Yii::app()->wunit->createClient();
-	}
+    /**
+     * Create HttpKernel Client
+     *
+     * @return \WUnit\HttpKernel\Client
+     */
+    public static function createClient()
+    {
+        return Yii::app()->wunit->createClient();
+    }
 }
