@@ -17,18 +17,25 @@ class YiiKernel implements HttpKernelInterface
 	{
 		$request->overrideGlobals();
 		$app = \Yii::app();
-		$app->setComponent('request',new YiiRequest());
-		$app->request->inject($request->files->all());
 
-		$hasError = false;
+		$requestClass = get_class($app->request);
+		if (!$requestClass)
+			$app->setComponent('request',new YiiRequest());
+		else
+			$app->setComponent('request',new $requestClass);
+
+		$this->setHeaders();
+		$this->setFiles($request->files->all());
+
+		$exception = null;
 
 		ob_start();
 		try {
 			$app->processRequest();
 		} catch (YiiExitException $e) {
-
+			// nothing to do
 		} catch (\Exception $e) {
-			$hasError = true;
+			$exception = $e;
 		}
 
 		$content = ob_get_contents();
@@ -42,7 +49,13 @@ class YiiKernel implements HttpKernelInterface
 			$app->session->open();
 		}
 
-		return new Response($content, $this->getStatusCode($headers, $hasError), $headers);
+		if ($exception != null) {
+			if (get_class($exception) == "CHttpException")
+				return new Response($content, $exception->statusCode, $headers);
+			echo $exception;
+			return new Response($content, 503, $headers);
+		}
+		return new Response($content, $this->getStatusCode($headers), $headers);
 	}
 
 	protected function getHeaders()
@@ -61,14 +74,43 @@ class YiiKernel implements HttpKernelInterface
 		return $headers;
 	}
 
-	protected function getStatusCode($headers, $error = false)
+	protected function getStatusCode($headers)
 	{
-		if ($error)
-			return 503;
-
 		if (array_key_exists('location', $headers))
 			return 302;
 
 		return 200;
+	}
+
+	public function setHeaders() {
+		if (empty($_SERVER['PHP_SELF']))
+			$_SERVER['PHP_SELF'] = '/index.php';
+		if (empty($_SERVER['SCRIPT_FILENAME']))
+			$_SERVER['SCRIPT_FILENAME'] = \Yii::getPathOfAlias('application') . '/../index.php';
+	}
+
+	private function setFiles($files = array()) {
+		$filtered = array();
+		foreach ($files as $key => $value) {
+			if (is_array($value)) {
+				$filtered[$key] = $this->filterFiles($value);
+			} elseif (is_object($value)) {
+				// Yii style :)
+				$filtered['tmp_name'][$key] = $value->getPathname();
+				$filtered['name'][$key] = $value->getClientOriginalName();
+				$filtered['type'][$key] = $value->getClientMimeType();
+				$filtered['size'][$key] = $value->getClientSize();
+				$filtered['error'][$key] = $value->getError();
+//				$filtered[$key] = array(
+//					'tmp_name' => $value->getPathname(),
+//					'name' => $value->getClientOriginalName(),
+//					'type' => $value->getClientMimeType(),
+//					'size' => $value->getClientSize(),
+//					'error' => $value->getError(),
+//				);
+			}
+		}
+
+		$_FILES = $filtered;
 	}
 }
