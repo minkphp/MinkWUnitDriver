@@ -42,9 +42,9 @@ Installation
 ``` json
 {
     "requires": {
-        "behat/mink":              "1.4.*",
-		"behat/mink-extension":    "*",
-		"behat/yii-extension":     "*",
+        "behat/mink":              "~1.5",
+        "behat/mink-extension":    "*",
+        "behat/yii-extension":     "*",
         "behat/mink-wunit-driver": "*"
     }
 }
